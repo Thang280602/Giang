@@ -25,9 +25,9 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeRequests(authorize -> authorize
-                        .requestMatchers("/admin/**").hasAuthority("Admin") // Chỉ cho phép người dùng có quyền "Admin" truy cập vào các URL bắt đầu bằng "/admin"
-                        .requestMatchers("/", "/login", "/logon", "/logout","/user/card/**", "/user/AboutUs/**", "/user/listView/**", "/user/ListingClassic/**", "/user/index2/**", "/user/service/**", "/user/comingup/**", "/user/blog/**","/user/index/**").permitAll() // Cho phép tất cả mọi người truy cập vào các URL khác
-                        .anyRequest().authenticated()) // Tất cả các yêu cầu khác đều yêu cầu xác thực
+                        .requestMatchers("/admin/**").hasAuthority("Admin")
+                        .requestMatchers("/","/register", "/login", "/logon", "/logout", "/user/card/**", "/user/AboutUs/**", "/searchCate", "/user/ListingClassic/**", "/user/index2/**", "/user/service/**", "/user/comingup/**", "/user/blog/**", "/user/index/**").permitAll()
+                        .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
@@ -36,10 +36,8 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/", true))
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/"))
-                .logout(logout -> logout
-                        .logoutUrl("/admin-logout")
-                        .logoutSuccessUrl("/login")); // Đổi logoutSuccessUrl cho admin thành /login
+                        .logoutSuccessUrl("/"));
+
         return http.build();
     }
 

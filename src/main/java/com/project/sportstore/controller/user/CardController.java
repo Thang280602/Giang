@@ -52,6 +52,7 @@ public class CardController {
 		return "/user/cart";
 	}
 
+
 	@PostMapping("/user/card")
 	public String addCart(Model model,@RequestParam("id") Integer idProduct,@RequestParam("quantity") Integer quantity, Principal principal) {
 		if (principal == null) {

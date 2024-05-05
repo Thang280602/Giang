@@ -2,7 +2,9 @@ package com.project.sportstore.controller.admin;
 
 
 
+import com.project.sportstore.model.Order;
 import com.project.sportstore.model.User;
+import com.project.sportstore.service.OrderService;
 import com.project.sportstore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +19,12 @@ import java.util.List;
 public class AdminController {
 	@Autowired
 	private UserService service;
+	@Autowired
+	private OrderService orderSevice;
 	@GetMapping
-	public String index() {
-
+	public String index(Model model) {
+		List<Order> order = this.orderSevice.getAll();
+		model.addAttribute("orders", order);
 		return "admin/index";
 	}
 
@@ -33,4 +38,5 @@ public class AdminController {
 		model.addAttribute("user", user);
 		return "admin/account/index";
 	}
+
 }

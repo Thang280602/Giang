@@ -105,46 +105,28 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img th:src="@{/assets/images/user2-160x160.jpg}" class="user-image" alt="User Image">
-              <span class="hidden-xs"><span sec:authentication="name"></span></span>
+              <span id="user-name"></span><br>
             </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img th:src="@{/assets/images/user2-160x160.jpg}" class="img-circle" alt="User Image">
 
-                <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a th:href="@{/admin-logout}" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
           </li>
           
         </ul>
       </div>
     </nav>
+   <script>
+     document.addEventListener("DOMContentLoaded", function() {
+       // Gửi yêu cầu AJAX đến server để lấy tên người dùng
+       var xhr = new XMLHttpRequest();
+       xhr.open("GET", "/getUsername", true);
+       xhr.onreadystatechange = function() {
+         if (xhr.readyState == 4 && xhr.status == 200) {
+           // Nhận dữ liệu từ server
+           var userName = xhr.responseText;
+           // Cập nhật phần HTML với tên người dùng
+           document.getElementById("user-name").innerText = userName;
+         }
+       };
+       xhr.send();
+     });
+   </script>
   </header>

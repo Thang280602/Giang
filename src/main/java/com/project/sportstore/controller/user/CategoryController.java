@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -30,13 +31,20 @@ public class CategoryController {
 //    @Autowired
 //    private CommentSevice commentSevice;
     @RequestMapping("")
-    public String home(Model model) {
+    public String home(Model model, Principal principal) {
         List<Category> categories = categorySevice.findByCategoryStatus(true);
         model.addAttribute("listCate", categories);
         List<Category> categories1 = categorySevice.getAll();
         model.addAttribute("cate1", categories1);
         List<Product> productAll = productSevice.getAll();
         model.addAttribute("productALL", productAll);
+        model.addAttribute("principal", principal);
+        String userName = "User";
+        if (principal != null) {
+            userName = principal.getName();
+        }
+        model.addAttribute("userName", userName);
+
 //        List<String> models = this.productSevice.findAllDistinctModels();
 //        model.addAttribute("model", models);
 //        List<String> productAddress = this.productSevice.findProductAddress();
@@ -70,16 +78,16 @@ public class CategoryController {
 //        return "/user/indexSearch";
 //    }
 //
-//    @PostMapping("/searchCate")
-//    public String SearchCate(Model model, @Param("keyword") String keyword) {
-//        List<Product> pro6 = this.productSevice.searchCategory(keyword);
-//        List<Category> categories = categorySevice.getAll();
-//        model.addAttribute("listCate", categories);
-//        model.addAttribute("pro6", pro6);
-//
-//        return "/index2";
-//    }
-//
+    @PostMapping("/searchCate")
+    public String SearchCate(Model model, @Param("keyword") String keyword) {
+        List<Product> pro6 = this.productSevice.searchCategory(keyword);
+        List<Category> categories = categorySevice.getAll();
+        model.addAttribute("listCate", categories);
+        model.addAttribute("pro6", pro6);
+
+        return "/index2";
+    }
+
 //    @RequestMapping("/user/service")
 //    public String Service(Model model) {
 //        List<Category> categories = categorySevice.getAll();
