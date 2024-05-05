@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="products-wrapper" th:fragment="productDisplay(products)">
+    <!-- Kiểm tra danh sách sản phẩm có trống không -->
+
+    <div th:each="pro : ${products}" class="single-product">
+        <div class="product-image pos-rel">
+            <a th:href="@{'/product-details/' + ${pro.id}}" class="">
+                <img th:src="@{'/uploads/' + ${pro.image}}" alt="Product Image">
+            </a>
+            <div class="product-action">
+                <a href="#" class="quick-view-btn"><i class="fal fa-eye"></i></a>
+                <a href="#" class="wishlist-btn"><i class="fal fa-heart"></i></a>
+                <a href="#" class="compare-btn"><i class="fal fa-exchange"></i></a>
+            </div>
+            <div class="product-action-bottom">
+                <a th:href="@{'/cart/add/' + ${pro.id}}" class="add-cart-btn"><i class="fal fa-shopping-bag"></i> Add to Cart</a>
+            </div>
+            <div class="product-sticker-wrapper">
+                <span class="product-sticker new">New</span>
+            </div>
+        </div>
+        <div class="product-desc">
+            <div class="product-name">
+                <a th:href="@{'/product-details/' + ${pro.id}}"><span th:text="${pro.productName}"></span></a>
+            </div>
+            <div class="product-price">
+                <span class="price-now" th:text="'$' + ${pro.price}"></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
