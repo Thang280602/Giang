@@ -1881,11 +1881,20 @@ div.mean-container a.meanmenu-reveal {
   flex-wrap: wrap;
   column-gap: 30px;
 }
-
+.products-wrapper1 {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 30px;
+}
+.products-wrapper1 .single-product1 {
+  margin-bottom: 50px;
+}
 .products-wrapper .single-product {
   margin-bottom: 50px;
 }
-
+.products-wrapper1 > div {
+  width: calc((100% - 120px) / 5);
+}
 .products-wrapper > div {
   width: calc((100% - 120px) / 5);
 }
@@ -1920,6 +1929,15 @@ div.mean-container a.meanmenu-reveal {
   border-radius: 0;
 }
 
+.active{
+  font-size: 18px;
+  font-weight: 500;
+  height: 20px;
+  line-height: 20px;
+  border-right: 1px solid var(--clr-common-border);
+  padding-right: 20px;
+
+}
 .product-tab-nav .nav-tabs {
   display: flex;
   gap: 20px;
