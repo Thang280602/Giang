@@ -1,6 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security6">
 
 
 <!-- Mirrored from wphix.com/html/ecomart-prev/ecomart/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 24 Mar 2024 12:00:00 GMT -->
@@ -319,17 +319,17 @@
     <!-- side toggle end -->
 
     <!-- page title area start  -->
-    <section class="page-title-area"  th:attr="data-background=@{../../assetsuser/img/bg/page-title-bg.jpg}">
+    <section class="page-title-area" th:attr="data-background=@{../../assetsuser/img/bg/page-title-bg.jpg}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="page-title-wrapper text-center">
-                        <h1 class="page-title mb-10">Shop</h1>
+                        <h1 class="page-title mb-10">Checkout</h1>
                         <div class="breadcrumb-menu">
                             <nav aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs">
                                 <ul class="trail-items">
                                     <li class="trail-item trail-begin"><a href="index.html"><span>Home</span></a></li>
-                                    <li class="trail-item trail-end"><span>Felted Shirt for Man</span></li>
+                                    <li class="trail-item trail-end"><span>Checkout</span></li>
                                 </ul>
                             </nav>
                         </div>
@@ -340,108 +340,70 @@
     </section>
     <!-- page title area end  -->
 
-    <!-- shop details area start  -->
-    <section class="shop-details-area pt-120 pb-90 " style="margin-bottom: 100px" th:each="pro:${productID}">
-        <form th:action="@{/user/card}" method="post">
-            <input type="hidden" name="id" th:value="${pro.id}"/>
-            <div class="container container-small">
-                <div class="row">
-                    <div class="col-lg-6">
-                            <div class="product-details-tab-wrapper mb-30">
-                                <div class="product-details-tab">
-                                    <div class="tab-content" id="productDetailsTab">
-                                        <div class="tab-pane fade active show" id="pro-1" role="tabpanel"
-                                             aria-labelledby="pro-1-tab">
-                                            <img class="active imgAnh" th:src="@{'/uploads/'+${pro.image}}" alt="...">
-                                        </div>
+    <!-- coupon-area start -->
+    <!-- coupon-area end -->
 
-                                    </div>
-                                </div>
-                                <div class="product-details-nav">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item" role="presentation" th:each="imgpro:${imgDetail}">
-                                            <button class="nav-link active" id="pro-1-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#pro-1" type="button" role="tab" aria-controls="pro-1"
-                                                    aria-selected="false">
-                                                <img th:src="@{'/uploads/'+${imgpro}}" alt="...">
-                                            </button>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="product-side-info mb-30">
-                            <h4 class="product-name mb-10"><span
-                                    th:text="${pro.productName}"></span></h4>
-                            <span class="product-price"><span th:text="'VND ' + ${pro.price}"></span></span>
-
-                            <p class="mb-30" th:utext="${pro.description}"></p>
-                            <div class="product-quantity-cart mb-25">
-                                <div class="product-quantity-form">
-                                    <button class="cart-minus"><i class="far fa-minus"></i></button>
-                                    <input class="cart-input" type="text" value="1" name="quantity">
-                                    <button class="cart-plus"><i class="far fa-plus"></i></button>
-                                </div>
-                                <button type="submit" class="add-cart-btn"><i
-                                        class="fal fa-shopping-bag"></i> Add to Cart</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </section>
-    <!-- shop details area end  -->
-
-    <div class="related_product pb-500" >
+    <!-- checkout-area start -->
+    <section class="checkout-area pb-70">
         <div class="container container-small">
-            <div class="section-title mb-55">
-                <h2>Related Product</h2>
-            </div>
-            <!-- Slider main container -->
-            <div class="swiper-container r-product-active">
-                <!-- Additional required wrapper -->
-                <div class="swiper-wrapper">
-                    <!-- Begin Product Slide -->
-                    <div th:each="pro : ${products}" class="swiper-slide single-product">
-                        <input type="hidden" name="id" th:value="${pro.id}" />
-                        <div class="product-image pos-rel">
-                            <a th:href="@{/user/detail/{id}(id=${pro.id})}" class="">
-                                <img th:src="@{'/uploads/' + ${pro.image}}" alt="Product Image" />
-                            </a>
-                            <div class="product-action">
-                                <a href="#" class="quick-view-btn"><i class="fal fa-eye"></i></a>
-                                <a href="#" class="wishlist-btn"><i class="fal fa-heart"></i></a>
-                                <a href="#" class="compare-btn"><i class="fal fa-exchange"></i></a>
-                            </div>
-                            <div class="product-action-bottom">
-                                <button type="submit" class="add-cart-btn"><i class="fal fa-shopping-bag"></i> Add to Cart</button>
-                            </div>
-                            <div class="product-sticker-wrapper">
-                                <span class="product-sticker new">New</span>
-                            </div>
-                        </div>
-                        <div class="product-desc">
-                            <div class="product-name">
-                                <a th:href="@{'/product-details/' + ${pro.id}}"><span th:text="${pro.productName}"></span></a>
-                            </div>
-                            <div class="product-price">
-                                <span class="price-now" th:text="'VND ' + ${pro.price}"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Product Slide -->
+            <div class="your-order mb-30 ">
+                <h3>Your bill</h3>
+                <div class="your-order-table table-responsive">
+                    <table th:each="order:${order}">
+                        <thead>
+                        <tr>
+                            <th class="product-name">Product</th>
+                            <th class="product-total">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th class="product-name">Status:</th>
+                            <th class="product-total" > <span th:text="${checkstatus}"></span></th>
+                        </tr>
+                        <tr>
+                            <th class="product-name">Address:</th>
+                            <th class="product-total" > <span th:text="${order.addressShip}"></span></th>
+                        </tr>
+                        <tr>
+                            <th class="product-name">Phone:</th>
+                            <th class="product-total" > <span th:text="${order.phone}"></span></th>
+                        </tr>
+                        <tr class="cart_item" th:each="cardItem:${card.cardItems}">
+                            <td class="product-name">
+                                       <span
+                                               th:text="${cardItem.getProduct().getProductName()}"></span><strong
+                                    class="product-quantity"> ×<span
+                                    th:text="${cardItem.quantity}"></span> </strong>
+                            </td>
+                            <td class="product-total">
+                                            <span class="amount"><span
+                                                    th:text="${card.totalPrice()}"></span>
+                                            </span>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                        <tfoot>
+
+                        <tr class="order-total">
+                            <th>Order Total</th>
+                            <td><strong><span class="amount" th:text="'$ '+ ${total}"></span></strong>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
                 </div>
-                <!-- If we need pagination -->
-                <div class="testimonial-pagination swiper-pagination"></div>
-                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+
+            </div>
+            <div style="padding: 20px 10px;border-top-style: dashed; border-width: 1px; border-color: rgb(0, 0, 0);">
+                <div style="font-size: 18px;margin-top: 20px; font-weight: 700; text-align: center; width: 100%">Thank you for visiting and purchasing products from the store :
+                    <a th:href="@{/}"><span style="color: orangered">Return shop</span> </a>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+    <!-- checkout-area end -->
 
 
 </main>
@@ -536,9 +498,8 @@
     </svg>
 </div>
 <!-- back to top end -->
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 <!-- JS here -->
 <script th:src="@{../../assetsuser/js/vendor/jquery-3.6.0.min.js}"></script>
 <script th:src="@{../../assetsuser/js/vendor/waypoints.min.js}"></script>
@@ -557,35 +518,8 @@
 <script th:src="@{../../assetsuser/js/isotope.pkgd.min.js}"></script>
 <script th:src="@{../../assetsuser/js/imagesloaded.pkgd.min.js}"></script>
 <script th:src="@{../../assetsuser/js/main.js}"></script>
-<script>
-    $(document).ready(function () {
-        $(".nav-link").click(function () {
-            // Kiểm tra xem phần tử .course-reviews-img có tồn tại trong các phần tử cha của .nav-link hay không
-            if (!$(this).parents('.course-reviews-img').length) {
-                // Nếu không, thực hiện thay đổi ảnh
-                var imageUrl = $(this).find("img").attr("src");
-                $(".tab-pane.active img").attr("src", imageUrl);
-            }
-        });
-    });
-</script>
-<script>
-    var swiper = new Swiper('.r-product-active', {
-        slidesPerView: 4,
-        spaceBetween: 30,
-        loop: true, // Lặp lại ảnh
-        autoplay: {
-            delay: 5000, // Thời gian chờ giữa các slide
-            disableOnInteraction: false, // Không tắt autoplay khi người dùng tương tác
-        },
-        pagination: {
-            el: '.testimonial-pagination', // Chỉ định đối tượng hiển thị pagination
-            clickable: true, // Cho phép click vào pagination để chuyển slide
-        },
-    });
-</script>
 </body>
 
 
-<!-- Mirrored from wphix.com/html/ecomart-prev/ecomart/shop-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 24 Mar 2024 12:00:50 GMT -->
+<!-- Mirrored from wphix.com/html/ecomart-prev/ecomart/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 24 Mar 2024 12:00:51 GMT -->
 </html>

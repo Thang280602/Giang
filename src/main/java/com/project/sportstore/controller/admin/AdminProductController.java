@@ -99,10 +99,10 @@ public class AdminProductController {
 		String fileName1 = files[0].getOriginalFilename();
 		boolean isEmpty1 = fileName1 == null || fileName1.trim().length() == 0;
 		if (!isEmpty1) {
-			// xoa cac ban ghi
+
 			this.imageProductSevice.deleteByProductId(product.getId());
 			for (MultipartFile multipartFile : files) {
-				// upload moi
+
 				ImageProduct imageProduct = new ImageProduct();
 				imageProduct.setImage(multipartFile.getOriginalFilename());
 				imageProduct.setProduct(product);

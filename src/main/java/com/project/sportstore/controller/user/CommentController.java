@@ -22,8 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CommentController {
     @Autowired
     private CommentService commentSevice;
-//    @Autowired
-//    private BlogService blogService;
+
     @RequestMapping("/user/comment")
     private String indexComment(Principal principal, Model model) {
         if (principal == null) {
@@ -34,8 +33,7 @@ public class CommentController {
         Comment comment1 = new Comment();
         comment1.setUser(customUserDetails.getUser());
         model.addAttribute("comment", comment1);
-//        List<Blog> blog=this.blogService.getAll();
-//        model.addAttribute("blog", blog);
+
         return "/user/Comment";
     }
 

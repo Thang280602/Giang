@@ -3,14 +3,8 @@ package com.project.sportstore.controller.user;
 import java.security.Principal;
 import java.util.List;
 
-import com.project.sportstore.model.Card;
-import com.project.sportstore.model.CardItem;
-import com.project.sportstore.model.Category;
-import com.project.sportstore.model.CustomUserDetail;
-import com.project.sportstore.service.CardItemSevice;
-import com.project.sportstore.service.CardSevice;
-import com.project.sportstore.service.CategorySevice;
-import com.project.sportstore.service.ProductSevice;
+import com.project.sportstore.model.*;
+import com.project.sportstore.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -32,8 +26,8 @@ public class CardController {
 	private ProductSevice productSevice;
 	@Autowired
 	private CategorySevice categorySevice;
-//	@Autowired
-////	private BlogService blogService;
+	@Autowired
+	private BlogService blogService;
 	@GetMapping("/user/card")
 	public String showCart(Principal principal, Model model) {
 		if (principal == null) {
@@ -47,8 +41,13 @@ public class CardController {
 		model.addAttribute("listCard", card);
 		List<Category> categories1=categorySevice.getAll();
 		model.addAttribute("cate1", categories1);
-//		List<Blog> blog=this.blogService.getAll();
-//		model.addAttribute("blog", blog);
+		String userName = "User";
+		if (principal != null) {
+			userName = principal.getName();
+		}
+		model.addAttribute("userName", userName);
+		List<Blog> blog=this.blogService.getAll();
+		model.addAttribute("blog", blog);
 		return "/user/cart";
 	}
 
@@ -62,9 +61,7 @@ public class CardController {
 		CustomUserDetail customUserDetails = (CustomUserDetail) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 
-		// Kiểm tra ID của User
 		if (customUserDetails != null && customUserDetails.getUser() != null) {
-			// Kiểm tra xem User đã có Card chưa
 			if (this.cardSevice.check(customUserDetails.getUser().getId()) == 0) {
 				Card card = new Card();
 				card.setUser(customUserDetails.getUser());
@@ -108,8 +105,8 @@ public class CardController {
 		model.addAttribute("listCard", card);
 		List<Category> categories1=categorySevice.getAll();
 		model.addAttribute("cate1", categories1);
-//		List<Blog> blog=this.blogService.getAll();
-//		model.addAttribute("blog", blog);
+		List<Blog> blog=this.blogService.getAll();
+		model.addAttribute("blog", blog);
 		return "/user/cart";
 	}
 

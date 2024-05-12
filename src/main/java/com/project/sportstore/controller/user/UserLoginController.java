@@ -1,6 +1,8 @@
 package com.project.sportstore.controller.user;
 
+import com.project.sportstore.model.Blog;
 import com.project.sportstore.model.User;
+import com.project.sportstore.service.BlogService;
 import com.project.sportstore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 /**
  * @author thang
  */
@@ -17,26 +21,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserLoginController {
     @Autowired
     private UserService userService;
-//    @Autowired
-////    private CategorySevice categorySevice;
-//    @Autowired
-////    private BlogService blogService;
+
+    @Autowired
+    private BlogService blogService;
     @RequestMapping("/login")
     public String login( Model model) {
-//        List<Category> categories=categorySevice.getAll();
-//        model.addAttribute("listCate", categories);
-//        List<Blog> blog=this.blogService.getAll();
-//        model.addAttribute("blog", blog);
+        List<Blog> blog=this.blogService.getAll();
+        model.addAttribute("blog", blog);
         return "/user/login";
     }
     @RequestMapping("/register")
     public String register(Model model) {
         User user=new User();
         model.addAttribute("user", user);
-//        List<Category> categories=categorySevice.getAll();
-//        model.addAttribute("listCate", categories);
-//        List<Blog> blog=this.blogService.getAll();
-//        model.addAttribute("blog", blog);
+        List<Blog> blog=this.blogService.getAll();
+        model.addAttribute("blog", blog);
         ;		return "/user/register";
     }
     @PostMapping("/register")

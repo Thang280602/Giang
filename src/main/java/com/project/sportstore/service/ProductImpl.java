@@ -23,6 +23,8 @@ public class ProductImpl implements ProductSevice {
 		return this.productRepository.findAll();
 	}
 
+
+
 	@Override
 	public Boolean create(Product product) {
 		try {
@@ -82,9 +84,9 @@ public class ProductImpl implements ProductSevice {
 	}
 
 	@Override
-	public List<Product> getOrderByNew() {
+	public List<Product> getOrderByNew(String sortOrder) {
 		// TODO Auto-generated method stub
-		return this.productRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
+		return this.productRepository.findAllOrderByNameAsc(sortOrder);
 	}
 
 	@Override
@@ -93,30 +95,7 @@ public class ProductImpl implements ProductSevice {
 		return this.productRepository.findByPrice(price);
 	}
 
-//	@Override
-//	public List<String> findAllDistinctModels() {
-//		// TODO Auto-generated method stub
-//		return this.productRepository.findAllDistinctModels();
-//	}
-//
-//	@Override
-//	public List<String> findProductAddress() {
-//		// TODO Auto-generated method stub
-//		return this.productRepository.findProductAddress();
-//	}
 
-//	@Override
-//	public List<Product> SearchProduct(SearchModel searchModel) {
-//		String categoryName = searchModel.getCategoryName();
-//		String models = searchModel.getModel();
-//		String productAddress = searchModel.getProductAddress();
-//		String[] price = searchModel.getProductPrice().split("-");
-//		Double priceMin = Double.parseDouble(price[0]);
-//		Double priceMax = Double.parseDouble(price[1]);
-//
-//		String sortId = searchModel.getSortId();
-//		return this.productRepository.SearchProduct(categoryName, models, productAddress, priceMin, priceMax, sortId);
-//	}
 
 	@Override
 	public List<Product> findByCategoryId(Integer categoryId) {

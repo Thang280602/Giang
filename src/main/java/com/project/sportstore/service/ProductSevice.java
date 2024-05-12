@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 public interface ProductSevice {
 	List<Product> getAll();
 
-	List<Product> getOrderByNew();
+	List<Product> getOrderByNew(String sortOrder);
 
 	Boolean create(Product product);
 
@@ -32,11 +32,7 @@ public interface ProductSevice {
 
 	List<Product> findByPrice(@Param("price") Double price);
 
-//	List<String> findAllDistinctModels();
-//
-//	List<String> findProductAddress();
 
-//	List<Product> SearchProduct(SearchModel searchModel);
 	Page<Product> getAll(Integer pageNo);
 	Page<Product> searchProduct(String keyword,Integer pageNo);
 }

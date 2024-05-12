@@ -26,7 +26,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeRequests(authorize -> authorize
                         .requestMatchers("/admin/**").hasAuthority("Admin")
-                        .requestMatchers("/","/register", "/login", "/logon", "/logout", "/user/card/**", "/user/AboutUs/**", "/searchCate", "/user/ListingClassic/**", "/user/index2/**", "/user/service/**", "/user/comingup/**", "/user/blog/**", "/user/index/**").permitAll()
+                        .requestMatchers("/","user/shop-detail","/user/blog/**","/register", "/login", "/logon", "/logout", "/user/card/**", "/user/aboutus/**", "/searchCate", "/user/ListingClassic/**", "/user/index2/**", "/user/service/**", "/user/comingup/**", "/user/blog/**", "/user/index/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage("/login")
